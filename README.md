@@ -16,7 +16,9 @@ $ ./dependencies.sh
 ```
 
 ## Json Configuration
-Before running import processes, edit the ```pelias.json``` file to point to the appropriate file names and data paths of your desired datasets. The ```pelias.json``` assumes that Pelias data and code are located in the ```/home/user/pelias``` directory. Elasticsearch hosts will have to be changed if is not on ```localhost```.
+Before running import processes, edit the ```pelias.json``` file to point to the appropriate file names and data paths of your desired datasets. The ```pelias.json``` assumes that Pelias data and code are located in the ```/home/user/pelias``` directory. Elasticsearch hosts will have to be changed if it is not on ```localhost```.
+
+Elasticsearch:
 ```json
 {
   "esclient": {
@@ -26,6 +28,7 @@ Before running import processes, edit the ```pelias.json``` file to point to the
   }]
 }
 ```
+Imports:
 ```json
 {
 "imports": {
@@ -68,7 +71,7 @@ GN_IMPORT=all
 DIRECTORY=$HOME/pelias
 ```
 
-Run the ```build.sh``` script to being the import.
+Run the ```build.sh``` script to begin the import.
 
 ```
 $ sudo chmod +x build.sh
