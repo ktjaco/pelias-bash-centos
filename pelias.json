@@ -1,0 +1,62 @@
+{
+  "esclient": {
+    "apiVersion": "1.7",
+    "keepAlive": true,
+    "requestTimeout": "120000",
+    "hosts": [{
+      "env": "development",
+      "protocol": "http",
+      "host": "localhost",
+      "port": 9200
+    }],
+    "log": [{
+      "type": "stdio",
+      "level": [ "error", "warning" ]
+    }]
+  },
+  "dbclient": {
+    "statFrequency": 10000
+  },
+  "api": {
+    "accessLog": "common",
+    "host": "http://pelias.mapzen.com/",
+    "version": "1.0"
+  },
+  "logger": {
+    "level": "debug",
+    "timestamp": true,
+    "colorize": true
+  },
+  "acceptance-tests": {
+    "endpoints": {
+      "local": "http://localhost:3100/v1/",
+      "dev-cached": "http://pelias.dev.mapzen.com.global.prod.fastly.net/v1/",
+      "dev": "http://pelias.dev.mapzen.com/v1/",
+      "prod": "http://search.mapzen.com/v1/",
+      "prod-uncached": "http://pelias.mapzen.com/v1/",
+      "prodbuild": "http://pelias.prodbuild.mapzen.com/v1/"
+    }
+  },
+  "imports": {
+    "geonames": {
+      "datapath": "/home/user/pelias/geonames/data",
+      "adminLookup": false
+    },
+    "openstreetmap": {
+      "datapath": "/home/user/pelias/openstreetmap/data",
+      "adminLookup": false,
+      "leveldbpath": "/tmp/leveldb/",
+      "import": [{
+        "filename": "toronto_canada.osm.pbf"
+      }]
+    },
+    "openaddresses": {
+      "datapath": "/home/user/pelias/openaddresses/data",
+      "files": []
+    },
+    "whosonfirst": {
+      "datapath": "/home/user/pelias/whosonfirst/wof_data"
+    }
+  }
+}
+
