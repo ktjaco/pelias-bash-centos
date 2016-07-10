@@ -5,8 +5,8 @@
 OSM_LINK=https://s3.amazonaws.com/metro-extracts.mapzen.com/toronto_canada.osm.pbf
 OSM=toronto_canada.osm.pbf
 
-OA_LINK=http://s3.amazonaws.com/data.openaddresses.io/openaddr-collected-global.zip
-OA=openaddr-collected-global.zip
+OA_LINK=http://s3.amazonaws.com/data.openaddresses.io/runs/92866/ca/on/city_of_toronto.zip
+OA=city_of_toronto.zip
 
 GN_LINK=http://download.geonames.org/export/dump/CA.zip
 GN=CA.zip
