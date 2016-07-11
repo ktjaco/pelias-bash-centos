@@ -1,4 +1,4 @@
-A series of bash scripts to build the Pelias geocoder on CentOS 6.7. 
+A series of bash scripts to build Pelias on CentOS 6.7. 
 
 A full overview of Pelias installation docs can be found at the official Pelias GitHub page [here](https://github.com/pelias/pelias-doc/blob/master/installing.md).
 
