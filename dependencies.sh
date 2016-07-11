@@ -1,13 +1,12 @@
 #!/bin/bash
 
 #### Description: Installs prerequisites for Pelias (Elasticsearch, Node, Java, etc..)
-#### Written by: Kent Jacobs
 
 # bomb out if something goes wrong
 set -e
 
 echo "### Install Elasticsearch"
-echo 3
+sleep 3
 
 # install dependencies
 
@@ -52,6 +51,7 @@ sudo echo "indices.recovery.max_bytes_per_sec: 40mb" >> /etc/elasticsearch/elast
 
 sudo service elasticsearch restart
 
+echo "### Check to see if Elasticsearch is running"
 sleep 7s
 
 curl localhost:9200
@@ -59,7 +59,6 @@ curl localhost:9200
 sleep 3s
 
 echo "### Install Java"
-echo 3
 
 # install dependencies
 
@@ -78,7 +77,7 @@ sudo yum localinstall -y jdk-7u79-linux-x64.rpm
 sudo rm ~/jdk-7u79-linux-x64.rpm
 
 echo "### Install Node from source code"
-echo 3
+sleep 3
 
 cd /tmp
 
