@@ -7,18 +7,27 @@ $ git clone https://github.com/ktjaco/pelias-bash-centos
 $ cd pelias-bash-centos
 ```
 
-## Dependencies
-This bash script installs the required dependencies needed for Pelias such as Elasticsearch, Oracle-Java and Node. The ```dependencies.sh``` script also configures Elasticsearch settings for best optimization. Edit ```line 39``` according to your amount of available RAM. Note that ```ES_HEAP_SIZE``` should not be more than 50% of your available RAM or more than 32GB.
+###1. Install Elasticsearch
+This bash script installs Elasticsearch. The ```elasticsearch.sh``` script also configures Elasticsearch settings for best optimization. Edit the ```ES_HEAP_SIZE``` in the ```elasticsearch.sh``` script to 28 for full planet imports. Note that ```ES_HEAP_SIZE``` should not be more than 50% of your available RAM or more than 32GB.
 
 ```
-$ sudo chmod +x dependencies.sh
-$ ./dependencies.sh
+$ sudo chmod +x elasticsearch.sh
+$ ./elasticsearch.sh
 ```
 
-## Json Configuration
+###2. Install Node
+This bash script installs Node v0.12 and Oracle-Java 7 needed for Pelias.
+```
+$ sudo chmod +x node.sh
+$ ./node.sh
+```
+
+###3. Json Configuration
 Before running import processes, edit the ```pelias.json``` file to point to the appropriate file names and data paths of your desired datasets. The ```pelias.json``` assumes that Pelias data and code are located in the ```/home/user/pelias``` directory. Elasticsearch hosts will have to be changed if it is not on ```localhost```.
 
-Elasticsearch:
+```sudo nano pelias.json```
+
+####Elasticsearch:
 ```json
 {
   "esclient": {
@@ -28,7 +37,7 @@ Elasticsearch:
   }]
 }
 ```
-Imports:
+####Imports:
 ```json
 {
 "imports": {
@@ -41,7 +50,7 @@ Imports:
       "adminLookup": false,
       "leveldbpath": "/tmp/leveldb/",
       "import": [{
-        "filename": "toronto_canada.osm.pbf"
+        "filename": "planet-latest.osm.pbf"
       }]
     },
     "openaddresses": {
@@ -54,21 +63,16 @@ Imports:
   }
 }
 ```
-## Import
+###4. Import
 Before running the import, edit the bash script variables with your desired datasets. This example is using Toronto OSM and OA data and Canada GeoNames data.
 
 ```bash
-OSM_LINK=https://s3.amazonaws.com/metro-extracts.mapzen.com/toronto_canada.osm.pbf
-OSM=toronto_canada.osm.pbf
+OSM=planet-latest.osm.pbf
 
-OA_LINK=http://s3.amazonaws.com/data.openaddresses.io/runs/92866/ca/on/city_of_toronto.zip
-OA=city_of_toronto.zip
+OA=openaddr-collected-global.zip
 
-GN_LINK=http://download.geonames.org/export/dump/CA.zip
-GN=CA.zip
+GN=allCountries.zip
 GN_IMPORT=all
-
-DIRECTORY=$HOME/pelias
 ```
 
 Run the ```build.sh``` script to begin the import.
@@ -78,7 +82,7 @@ $ sudo chmod +x build.sh
 $ ./build.sh
 ```
 
-## Service
+###5. Service
 To start the Pelias server at ```http:localhost:3100/v1``` simply run ```sudo service pelias start```.
 ```
 $ sudo mv pelias.service /etc/init.d/
