@@ -11,6 +11,11 @@ $ cd pelias-bash-centos
 This bash script installs Elasticsearch. The ```elasticsearch.sh``` script also configures Elasticsearch settings for best optimization. Edit the ```ES_HEAP_SIZE``` in the ```elasticsearch.sh``` script to 28 for full planet imports. Note that ```ES_HEAP_SIZE``` should not be more than 50% of your available RAM or more than 32GB.
 
 ```
+$ sudo nano elasticsearch.sh
+
+    # Should look like this
+    sudo sed -i 's/export ES_HEAP_SIZE/export ES_HEAP_SIZE=28g/g' /etc/init.d/elasticsearch
+
 $ sudo chmod +x elasticsearch.sh
 $ ./elasticsearch.sh
 ```
@@ -25,7 +30,7 @@ $ ./node.sh
 ###3. Json Configuration
 Before running import processes, edit the ```pelias.json``` file to point to the appropriate file names and data paths of your desired datasets. The ```pelias.json``` assumes that Pelias data and code are located in the ```/home/user/pelias``` directory. Elasticsearch hosts will have to be changed if it is not on ```localhost```.
 
-```sudo nano pelias.json```
+```$ sudo nano pelias.json```
 
 ####Elasticsearch:
 ```json
