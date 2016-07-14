@@ -2,22 +2,26 @@
 
 #### Description: Populates Elasticsearch database for Pelias
 
-OSM_LINK=https://s3.amazonaws.com/metro-extracts.mapzen.com/toronto_canada.osm.pbf
-OSM=toronto_canada.osm.pbf
 
-OA_LINK=http://s3.amazonaws.com/data.openaddresses.io/runs/92866/ca/on/city_of_toronto.zip
-OA=city_of_toronto.zip
+# these variables will have to be changed if they have different file names or decide to import different regions
+# the elasticsearch host and datapaths will also have to be changed in the created pelias.json file
 
-GN_LINK=http://download.geonames.org/export/dump/CA.zip
-GN=CA.zip
+OSM=planet-latest.osm.pbf
+
+OA=openaddr-collected-global.zip
+
+GN=allCountries.zip
 GN_IMPORT=all
 
 DIRECTORY=$HOME/pelias
+
+IP=192.168.1.158
 
 # bomb out if something goes wrong
 set -e
 
 echo "##### Pelias Installation for Centos 6.3 #####"
+sleep 3
 
 # if the $HOME/pelias directory does not exist do the following...
 # this clones the github repos and installs the required packages
@@ -27,6 +31,7 @@ if [ ! -d $DIRECTORY ];
 then
 
 	echo "Create Pelias directory"
+	sleep 3
 
 	mkdir $HOME/pelias
 
@@ -49,8 +54,10 @@ then
 fi
 
 echo "### Directories created"
+sleep 3
 
 echo "### Create mapping indexes in Pelias/Schema"
+sleep 3
 
 	cd $HOME/pelias/schema
 
@@ -66,10 +73,15 @@ echo "### Create mapping indexes in Pelias/Schema"
 	node scripts/create_index.js
 
 echo "### Import OSM"
+sleep 3
 
 	cd $HOME/pelias/openstreetmap
 
-	wget $OSM_LINK
+	# copy osm file from datastore
+	# using sshpass avoiding having to type the password
+	sshpass -p 'datastore' rsync -avzr datastore@192.168.1.158:/home/datastore/$OSM . <<-EOF
+	yes
+	EOF
 	
 	mkdir data
 
@@ -79,18 +91,22 @@ echo "### Import OSM"
 	npm start
 
 echo "### Import OpenAddresses"
+sleep 3
 
 	cd $HOME/pelias/openaddresses
 
 	mkdir data
-	
-	wget $OA_LINK
+
+	# copy oa data from datastore
+	sshpass -p 'datastore' rsync -avzr datastore@192.168.1.158:/home/datastore/pelias/$OA . <<-EOF
+	yes
+	EOF
 
 	mv $OA data
 
 	cd data
 
-	unzip $OA
+	yes A | unzip $OA
 
 	cd ..
 
@@ -98,12 +114,16 @@ echo "### Import OpenAddresses"
 	node import.js
 
 echo "### Import GeoNames"
+sleep 3
 
 	cd $HOME/pelias/geonames
 
 	mkdir data
 
-	wget $GN_LINK
+	# copy gn data from datastore
+	sshpass -p 'datastore' rsync -avzr datastore@192.168.1.158:/home/datastore/pelias/$GN . <<-EOF
+	yes
+	EOF
 
 	mv $GN data
 
@@ -111,6 +131,7 @@ echo "### Import GeoNames"
 	./bin/pelias-geonames -i $GN_IMPORT
 
 echo "### Import WhosOnFirst"
+sleep 3
 
 	cd $HOME/pelias/whosonfirst
 
@@ -120,6 +141,6 @@ echo "### Import WhosOnFirst"
 	# begin wof import
 	npm start
 
+sleep 3
 echo "### Pelias Imports Complete!"
-
 
