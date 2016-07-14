@@ -18,7 +18,7 @@ sleep 3
 
 	sudo yum -y install git
 
-	sudo yum -y install nodejs
+#	sudo yum -y install nodejs
 
 	cd /etc/yum.repos.d/
 
