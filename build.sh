@@ -17,9 +17,6 @@ DIRECTORY=$HOME/pelias
 
 IP=192.168.1.158
 
-# bomb out if something goes wrong
-set -e
-
 echo "##### Pelias Installation for Centos 6.3 #####"
 sleep 3
 
