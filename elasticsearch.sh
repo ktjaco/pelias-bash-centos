@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#### Description: Installs prerequisites for Pelias (Elasticsearch, Node, Java, etc..)
-
-# bomb out if something goes wrong
-set -e
-
 echo "### Install Elasticsearch"
 sleep 3
 
