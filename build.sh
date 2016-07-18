@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#### Description: Populates Elasticsearch database for Pelias
-
-
 # these variables will have to be changed if they have different file names or decide to import different regions
 # the elasticsearch host and datapaths will also have to be changed in the created pelias.json file
 
