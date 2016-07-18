@@ -40,17 +40,17 @@ sleep 3
 
 	sudo sed -i 's/export ES_HEAP_SIZE/export ES_HEAP_SIZE=28g/g' /etc/init.d/elasticsearch
 
-	sudo echo "indices.breaker.fielddata.limit: 85%" >> /etc/elasticsearch/elasticsearch.yml
+	sudo sed -i '$ a indices.breaker.fielddata.limit: 85%' /etc/elasticsearch/elasticsearch.yml
 
-	sudo echo "indices.fielddata.cache.size: 75%" >> /etc/elasticsearch/elasticsearch.yml
+	sudo sed -i '$ a indices.fielddata.cache.size: 75%' /etc/elasticsearch/elasticsearch.yml
 
-	sudo echo "cluster.routing.allocation.node_concurrent_recoveries: 4" >> /etc/elasticsearch/elasticsearch.yml
+	sudo sed -i '$ a cluster.routing.allocation.node_concurrent_recoveries: 4' /etc/elasticsearch/elasticsearch.yml
 
-	sudo echo "cluster.routing.allocation.node_initial_primaries_recoveries: 18" >> /etc/elasticsearch/elasticsearch.yml
+	sudo sed -i '$ a cluster.routing.allocation.node_initial_primaries_recoveries: 18' /etc/elasticsearch/elasticsearch.yml
 
-	sudo echo "indices.recovery.concurrent_streams: 4" >> /etc/elasticsearch/elasticsearch.yml
+	sudo sed -i '$ a indices.recovery.concurrent_streams: 4' /etc/elasticsearch/elasticsearch.yml
 
-	sudo echo "indices.recovery.max_bytes_per_sec: 40mb" >> /etc/elasticsearch/elasticsearch.yml
+	sudo sed -i '$ a indices.recovery.max_bytes_per_sec: 40mb' /etc/elasticsearch/elasticsearch.yml
 
 	sudo service elasticsearch restart
 
@@ -81,4 +81,3 @@ sleep 3
 
 sleep 3
 echo "#### Dependencies finsished installing"
-
