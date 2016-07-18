@@ -41,3 +41,6 @@ make
 sudo make install
 
 node --version
+
+sleep 3
+echo "### Node finished installing"
