@@ -40,11 +40,11 @@
   "imports": {
     "geonames": {
       "datapath": "/home/user/pelias/geonames/data",
-      "adminLookup": false
+      "adminLookup": true
     },
     "openstreetmap": {
       "datapath": "/home/user/pelias/openstreetmap/data",
-      "adminLookup": false,
+      "adminLookup": true,
       "leveldbpath": "/tmp/leveldb/",
       "import": [{
         "filename": "toronto_canada.osm.pbf"
