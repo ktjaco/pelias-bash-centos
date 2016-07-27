@@ -11,26 +11,26 @@ $ cd pelias-bash-centos
 This bash script installs Elasticsearch. The ```elasticsearch.sh``` script also configures Elasticsearch settings for best optimization. Edit the ```ES_HEAP_SIZE``` in the ```elasticsearch.sh``` script to 28 for full planet imports. Note that ```ES_HEAP_SIZE``` should not be more than 50% of your available RAM or more than 32GB.
 
 ```
-$ sudo nano elasticsearch.sh
+$ sudo nano scripts/elasticsearch.sh
 
     # Should look like this
     sudo sed -i 's/export ES_HEAP_SIZE/export ES_HEAP_SIZE=28g/g' /etc/init.d/elasticsearch
 
-$ sudo chmod +x elasticsearch.sh
-$ ./elasticsearch.sh
+$ sudo chmod +x scripts/elasticsearch.sh
+$ ./scripts/elasticsearch.sh
 ```
 
 ###2. Install Node
 This bash script installs Node v0.12 and Oracle-Java 7 needed for Pelias.
 ```
-$ sudo chmod +x node.sh
-$ ./node.sh
+$ sudo chmod +x scripts/node.sh
+$ ./scripts/node.sh
 ```
 
 ###3. Json Configuration
 Before running import processes, edit the ```pelias.json``` file to point to the appropriate file names and data paths of your desired datasets. The ```pelias.json``` assumes that Pelias data and code are located in the ```/home/user/pelias``` directory. Elasticsearch hosts will have to be changed if it is not on ```localhost```.
 
-```$ sudo nano pelias.json```
+```$ sudo nano config/pelias.json```
 
 ####Elasticsearch:
 ```json
@@ -83,14 +83,13 @@ GN_IMPORT=all
 Run the ```build.sh``` script to begin the import.
 
 ```
-$ sudo chmod +x build.sh
-$ ./build.sh
+$ sudo chmod +x scripts/build.sh
+$ ./scripts/build.sh
 ```
 
 ###5. Service
 To start the Pelias server at ```http:localhost:3100/v1``` simply run ```sudo service pelias start```.
 ```
-$ sudo mv pelias.service /etc/init.d/
-$ sudo mv /etc/init.d/pelias.service /etc/init.d/pelias
+$ sudo mv service/pelias /etc/init.d/
 $ sudo service pelias { start | stop | restart | status }
 ```
