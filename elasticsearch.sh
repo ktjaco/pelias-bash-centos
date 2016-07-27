@@ -45,7 +45,27 @@ sleep 3
 
 	sudo sed -i '$ a indices.recovery.concurrent_streams: 4' /etc/elasticsearch/elasticsearch.yml
 
-	sudo sed -i '$ a indices.recovery.max_bytes_per_sec: 40mb' /etc/elasticsearch/elasticsearch.yml
+	sudo sed -i '$ a indices.recovery.max_bytes_per_sec: 50mb' /etc/elasticsearch/elasticsearch.yml
+	
+	sudo sed -i '$ a indices.memory.index_buffer_size: 30%' /etc/elasticsearch/elasticsearch.yml
+	
+	sudo sed -i '$ a threadpool.search.type: fixed' /etc/elasticsearch/elasticsearch.yml
+	
+	sudo sed -i '$ a threadpool.search.size: 50' /etc/elasticsearch/elasticsearch.yml
+	
+	sudo sed -i '$ a threadpool.search.queue_size: 200' /etc/elasticsearch/elasticsearch.yml
+
+	sudo sed -i '$ a threadpool.bulk.type: fixed' /etc/elasticsearch/elasticsearch.yml
+
+	sudo sed -i '$ a threadpool.bulk.size: 10' /etc/elasticsearch/elasticsearch.yml
+
+	sudo sed -i '$ a threadpool.bulk.queue_size: 1000' /etc/elasticsearch/elasticsearch.yml
+	
+	sudo sed -i '$ a threadpool.index.type: fixed' /etc/elasticsearch/elasticsearch.yml
+
+	sudo sed -i '$ a threadpool.index.size: 60' /etc/elasticsearch/elasticsearch.yml
+
+	sudo sed -i '$ a threadpool.index.queue_size: 1000' /etc/elasticsearch/elasticsearch.yml
 
 	sudo service elasticsearch restart
 
