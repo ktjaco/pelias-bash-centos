@@ -27,12 +27,12 @@ $ sudo chmod +x scripts/node.sh
 $ ./scripts/node.sh
 ```
 
-### 3. Json Configuration
+### 3. JSON Configuration
 Before running import processes, edit the ```pelias.json``` file to point to the appropriate file names and data paths of your desired datasets. The ```pelias.json``` assumes that Pelias data and code are located in the ```/home/user/pelias``` directory. Elasticsearch hosts will have to be changed if it is not on ```localhost```.
 
 ```$ sudo nano config/pelias.json```
 
-####Elasticsearch:
+#### Elasticsearch:
 ```json
 {
   "esclient": {
@@ -42,7 +42,7 @@ Before running import processes, edit the ```pelias.json``` file to point to the
   }]
 }
 ```
-####Imports:
+#### Imports:
 ```json
 {
 "imports": {
